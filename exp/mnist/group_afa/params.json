@@ -1,0 +1,8 @@
+{
+    "planner": "ap",
+    "model_cfg_file": "./exp/mnist/acflow_classifier/params.json",
+    "batch_size": 500,
+    "num_batches": 10,
+    "num_clusters": 28,
+    "exp_dir": "./exp/mnist/group_afa"
+}

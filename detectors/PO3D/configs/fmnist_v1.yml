@@ -1,0 +1,85 @@
+training:
+  batch_size: 128
+  n_epochs: 500000
+  n_iters: 300001
+  snapshot_freq: 5000
+  snapshot_sampling: true
+  anneal_power: 2.0
+  log_all_sigmas: false
+
+sampling:
+  batch_size: 100
+  data_init: false
+  step_lr: 0.00002
+  n_steps_each: 100
+  ckpt_id: null
+  final_only: true
+  fid: false
+  denoise: false
+  num_samples4fid: 10000
+  inpainting: false
+  interpolation: false
+  joint: false
+  marginal: true
+
+data:
+  dataset: "FMNIST"
+  image_size: 28
+  channels: 1
+  mask: "uniform-all"
+  logit_transform: false
+  uniform_dequantization: true
+  gaussian_dequantization: false
+  random_flip: false
+  rescaled: false
+  num_workers: 4
+
+ood_scoring:
+  ckpt_id: null
+  ood_ckpt_id: null
+  num_batches4plot: 5
+  num_batches4test: 5
+  network: "dose"
+  mask_embed_layers: [32,64,128]
+  mask_embed_dim: 256
+  state_dim: 10
+  made_residual_blocks: 4
+  made_hidden_dim: 256
+  made_components: 20
+  use_batch_norm: true
+  gaussian_min_scale: 0.001
+
+ood_data:
+  - dataset: "MNIST"
+    image_size: 28
+    channels: 1
+    random_flip: false
+  - dataset: "Omniglot"
+    image_size: 28
+    channels: 1
+    random_flip: false
+  - dataset: "KMNIST"
+    image_size: 28
+    channels: 1
+    random_flip: false
+
+model:
+  name: "ncsn_v1"
+  sigma_begin: 1
+  sigma_end: 0.01
+  sigma_dist: geometric
+  num_classes: 10
+  normalization: InstanceNorm++
+  nonlinearity: elu
+  spec_norm: false
+  ema: true
+  ema_rate: 0.999
+  ngf: 128
+
+optim:
+  weight_decay: 0.000
+  optimizer: "Adam"
+  lr: 0.001
+  beta1: 0.9
+  amsgrad: false
+  eps: 0.00000001
